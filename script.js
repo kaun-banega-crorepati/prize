@@ -10,7 +10,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
   const lotteryNumber = document.getElementById('lotteryNumber').value;
   const mobileNumber = document.getElementById('mobileNumber').value;
   
-  fetch('https://sheetbase.co/api/jagdish/1Gk5uaLaeEl_qeH4TJkxIlcUEDA8zQ24WATv8ZSjTrVc/sheet1/')
+  fetch('https://sheetbase.co/api/nitin/18M3V7-QY9a8bCBRs7F3xVEzjmooVdmP9hNHQNBnLPsc/sheet1/')
     .then(response => response.json())
     .then(data => {
       const userDetails = data.data.find(user => user.lotteryNumber === lotteryNumber && user.mobileNumber === mobileNumber);
