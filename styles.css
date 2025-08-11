@@ -109,3 +109,31 @@ button {
     transform: rotate(360deg);
   }
 }
+
+.load-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background-color: rgba(200, 200, 200, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.load {
+  border: 6px solid #f3f3f3; /* Light grey */
+  border-top: 6px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 50px; /* Reduced spinner size */
+  height: 50px; /* Reduced spinner size */
+  animation: spin 1.5s linear infinite;
+}
+#myImage {
+  display: none; /* Hide the image initially */
+  width: 200px;
+  height: 200px;
+  pointer-events: none;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
