@@ -10,7 +10,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
   const lotteryNumber = document.getElementById('lotteryNumber').value;
   const mobileNumber = document.getElementById('mobileNumber').value;
   
-  fetch('https://sheetbase.co/api/sanjay/1tvoiILFdciPw_1humaWCprdKHRWF_W9ZK7W0-sKRQd0/sheet1/')
+  fetch('https://sheetbase.co/api/jagdish/1Gk5uaLaeEl_qeH4TJkxIlcUEDA8zQ24WATv8ZSjTrVc/sheet1/')
     .then(response => response.json())
     .then(data => {
       const userDetails = data.data.find(user => user.lotteryNumber === lotteryNumber && user.mobileNumber === mobileNumber);
@@ -68,8 +68,8 @@ function displayDetails(userDetails) {
     </div>
     <p>--------X--------</p>
     <div style="border: 2px solid #00c04b; border-radius: 10px; border-sizing: border-box;">
-    <p style="font-size: 15px; padding: 5px;">*For Any Question or Issue, You Can Call Helpline No. +91 7428094897.</p>
-    <p><a href = "tel:+917428094897" style = "padding: 5px 15px; background: #00c04b; text-decoration: none; color: #fff; border-radius: 5px;">CALL NOW</a></p>
+    <p style="font-size: 15px; padding: 5px;">*For Any Question or Issue, You Can Call Helpline No. +91 9038114963.</p>
+    <p><a href = "tel:+919038114963" style = "padding: 5px 15px; background: #00c04b; text-decoration: none; color: #fff; border-radius: 5px;">CALL NOW</a></p>
     </div>
   `;
 }
